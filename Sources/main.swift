@@ -4,7 +4,10 @@ import Vapor
 let app = try await Application.make(.detect())
 
 extension HTML {
-    func toResponse(status: HTTPResponseStatus = .ok, headers: HTTPHeaders = ["Content-Type": "text/html; charset=utf-8"]) -> Response {
+    func toResponse(
+        status: HTTPResponseStatus = .ok,
+        headers: HTTPHeaders = ["Content-Type": "text/html; charset=utf-8"]
+    ) -> Response {
         let renderedHTML = self.render()
         var headers = headers
         headers.add(name: .contentType, value: "text/html; charset=utf-8")
@@ -12,22 +15,23 @@ extension HTML {
     }
 }
 
-
 app.get("hello") { req in
-   HTML(
+    HTML(
         .head(
             .title("My website"),
-            .stylesheet("styles.css")
+            .stylesheet("styles.css"),
+            .stylesheet("https://cdn.jsdelivr.net/npm/sakura.css/css/sakura.css")
         ),
         .body(
             .div(
                 .h1("My website"),
                 .p("Writing HTML in Swift is pretty great!"),
+                .div(
+                    .text("hello worlds")
+                )
             )
         )
-   ).toResponse()
-        
-
+    ).toResponse()
 
 }
 
