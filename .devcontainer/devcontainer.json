@@ -1,0 +1,10 @@
+{
+    "image": "swiftlang/swift:nightly-jammy",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "sswg.swift-lang"
+            ]
+        }
+    }
+}
